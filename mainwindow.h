@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QPaintEvent>
+#include "checkpointchoice.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -16,6 +17,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent *);
     ~MainWindow();
+    CheckpointChoice* checkpointChoice = new CheckpointChoice();
 
 private:
     Ui::MainWindow *ui;

@@ -4,6 +4,7 @@
 #include <QAction>
 #include <QPainter>
 #include <QString>
+#include <QTimer>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -24,6 +25,10 @@ MainWindow::MainWindow(QWidget *parent)
     });
     connect(StartBtn, &QPushButton::released,[=](){
         StartBtn->up();
+        QTimer::singleShot(200,this,[=](){
+            this->hide();
+            checkpointChoice->show();
+        });
     });
 }
 
