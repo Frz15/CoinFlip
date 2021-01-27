@@ -17,7 +17,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent *);
     ~MainWindow();
-    CheckpointChoice* checkpointChoice = new CheckpointChoice();
+    CheckpointChoice* checkpointChoice;
 
 private:
     Ui::MainWindow *ui;

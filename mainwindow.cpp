@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "mypushbutton.h"
+#include "checkpointchoice.h"
 #include <QAction>
 #include <QPainter>
 #include <QString>
@@ -16,7 +17,14 @@ MainWindow::MainWindow(QWidget *parent)
     });
     this->setWindowIcon(QIcon(":/res/Coin0001.png"));
     this->setFixedSize(320,588);
+    this->setWindowTitle(QString("CoinFlip"));
 
+    checkpointChoice = new CheckpointChoice();
+    connect(checkpointChoice, &CheckpointChoice::chooseSceneBack, this, [=](){
+        QTimer::singleShot(200,this, [=](){
+            this->show();
+        });
+    });
     MypushButton* StartBtn = new MypushButton(QString(":/res/MenuSceneStartButton.png"));
     StartBtn->setParent(this);
     StartBtn->move(this->width()*0.5-StartBtn->width()*0.5, this->height()*0.7);
@@ -28,6 +36,7 @@ MainWindow::MainWindow(QWidget *parent)
         QTimer::singleShot(200,this,[=](){
             this->hide();
             checkpointChoice->show();
+
         });
     });
 }

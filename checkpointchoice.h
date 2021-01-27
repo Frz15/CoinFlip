@@ -2,6 +2,7 @@
 #define CHECKPOINTCHOICE_H
 
 #include <QMainWindow>
+#include <QPaintEvent>
 
 namespace Ui {
 class CheckpointChoice;
@@ -14,6 +15,9 @@ class CheckpointChoice : public QMainWindow
 public:
     explicit CheckpointChoice(QWidget *parent = nullptr);
     ~CheckpointChoice();
+    void paintEvent(QPaintEvent* );
+signals:
+    void chooseSceneBack();
 
 private:
     Ui::CheckpointChoice *ui;
