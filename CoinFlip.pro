@@ -19,16 +19,19 @@ SOURCES += \
     checkpointchoice.cpp \
     main.cpp \
     mainwindow.cpp \
-    mypushbutton.cpp
+    mypushbutton.cpp \
+    playscene.cpp
 
 HEADERS += \
     checkpointchoice.h \
     mainwindow.h \
-    mypushbutton.h
+    mypushbutton.h \
+    playscene.h
 
 FORMS += \
     checkpointchoice.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    playscene.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

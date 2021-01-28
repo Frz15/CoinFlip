@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QPaintEvent>
+#include "playscene.h"
 
 namespace Ui {
 class CheckpointChoice;
@@ -16,6 +17,9 @@ public:
     explicit CheckpointChoice(QWidget *parent = nullptr);
     ~CheckpointChoice();
     void paintEvent(QPaintEvent* );
+    PlayScene* play = NULL;
+
+
 signals:
     void chooseSceneBack();
 
