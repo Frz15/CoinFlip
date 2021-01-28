@@ -1,13 +1,13 @@
 #ifndef MYCOIN_H
 #define MYCOIN_H
 
-#include <QWidget>
+#include <QPushButton>
 
-class MyCoin : public QWidget
+class MyCoin : public QPushButton
 {
     Q_OBJECT
 public:
-    explicit MyCoin(QWidget *parent = nullptr);
+    explicit MyCoin(int coinIndex);
 
 signals:
 

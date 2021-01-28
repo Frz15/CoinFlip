@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     checkpointchoice.cpp \
+    dataconfig.cpp \
     main.cpp \
     mainwindow.cpp \
     mycoin.cpp \
@@ -25,6 +26,7 @@ SOURCES += \
 
 HEADERS += \
     checkpointchoice.h \
+    dataconfig.h \
     mainwindow.h \
     mycoin.h \
     mypushbutton.h \

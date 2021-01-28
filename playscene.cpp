@@ -3,6 +3,10 @@
 #include <QPainter>
 #include "mypushbutton.h"
 #include <QLabel>
+#include "mycoin.h"
+#include "dataconfig.h"
+#include <QVector>
+#include <QDebug>
 
 PlayScene::PlayScene(int levelIndex):
     ui(new Ui::PlayScene)
@@ -31,6 +35,12 @@ PlayScene::PlayScene(int levelIndex):
     label->setText(str);
     label->setGeometry(QRect(30, this->height() - 50,120, 50));
 
+    dataConfig* data = new dataConfig();
+
+    QMap<int, QVector< QVector<int>>> levelData = data->mData;
+    QVector< QVector<int>> allCoinData;
+    allCoinData = levelData.value(levelIndex);
+
     for(int i = 0 ; i < 4;i++)
     {
         for(int j = 0 ; j < 4; j++)
@@ -40,7 +50,11 @@ PlayScene::PlayScene(int levelIndex):
             label->setGeometry(0,0,50,50);
             label->setPixmap(QPixmap(":/res/BoardNode.png"));
             label->setParent(this);
-            label->move(57 + i*50,200+j*50);
+            label->move(57 + i*50, 200+j*50);
+            int coinIndex = allCoinData[i][j];
+            MyCoin* coin = new MyCoin(coinIndex);
+            coin->setParent(this);
+            coin->move(59 + i*50, 202+j*50);
         }
     }
 }
