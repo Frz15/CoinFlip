@@ -35,6 +35,12 @@ CheckpointChoice::CheckpointChoice(QWidget *parent) :
         connect(menuBtn, &MypushButton::clicked, [=](){
             QString str = QString("您选择的是第 %1 关 ").arg( i+1);
             qDebug() << str;
+            PlayScene* play = new PlayScene(i+1);
+            this->hide();
+            play->show();
+            connect(play, &PlayScene::playSceneBack, this, [=](){
+                this->show();
+            });
         });
 
         QLabel* label = new QLabel;

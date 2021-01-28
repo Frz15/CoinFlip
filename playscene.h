@@ -12,8 +12,12 @@ class PlayScene : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit PlayScene(QWidget *parent = nullptr);
+    PlayScene(int levelIndex);
+    void paintEvent(QPaintEvent* );
     ~PlayScene();
+    int m_levelIndex;
+signals:
+    void playSceneBack();
 
 private:
     Ui::PlayScene *ui;

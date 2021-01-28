@@ -19,12 +19,14 @@ SOURCES += \
     checkpointchoice.cpp \
     main.cpp \
     mainwindow.cpp \
+    mycoin.cpp \
     mypushbutton.cpp \
     playscene.cpp
 
 HEADERS += \
     checkpointchoice.h \
     mainwindow.h \
+    mycoin.h \
     mypushbutton.h \
     playscene.h
 
