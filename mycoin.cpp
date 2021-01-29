@@ -3,6 +3,8 @@
 #include <QIcon>
 #include <QSize>
 #include <QTimer>
+#include <QDebug>
+#include <QMouseEvent>
 
 MyCoin::MyCoin(int posX, int posY, int coinIndex)
 {
@@ -60,4 +62,12 @@ void MyCoin::changeIcon(){
         timer2->start(30);
     }
     this->m_coinIndex = 1 - this->m_coinIndex;
+}
+
+void MyCoin::mousePressEvent(QMouseEvent *e){
+    if(this->win){
+        return;
+    }else{
+        QPushButton::mousePressEvent(e);
+    }
 }

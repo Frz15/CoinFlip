@@ -3,6 +3,7 @@
 
 #include <QPushButton>
 #include <QTimer>
+#include <QMouseEvent>
 
 class MyCoin : public QPushButton
 {
@@ -17,6 +18,8 @@ public:
     int min=1;
     int max=8;
     int m_coinIndex;
+    void mousePressEvent(QMouseEvent* e);
+    bool win = false;
 
 signals:
 

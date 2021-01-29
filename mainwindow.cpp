@@ -6,6 +6,7 @@
 #include <QPainter>
 #include <QString>
 #include <QTimer>
+#include <QSound>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -32,11 +33,12 @@ MainWindow::MainWindow(QWidget *parent)
         StartBtn->down();
     });
     connect(StartBtn, &QPushButton::released,[=](){
+        QSound* startSound = new QSound(":/res/TapButtonSound.wav");
+        startSound->play();
         StartBtn->up();
         QTimer::singleShot(200,this,[=](){
             this->hide();
             checkpointChoice->show();
-
         });
     });
 }

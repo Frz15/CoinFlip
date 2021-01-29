@@ -7,6 +7,7 @@
 #include "dataconfig.h"
 #include <QVector>
 #include <QDebug>
+#include <QPropertyAnimation>
 
 PlayScene::PlayScene(int levelIndex):
     ui(new Ui::PlayScene)
@@ -41,6 +42,20 @@ PlayScene::PlayScene(int levelIndex):
     QVector< QVector<int>> allCoinData;
     allCoinData = levelData.value(levelIndex);
 
+    QPushButton* winBtn = new QPushButton(this);
+    QPixmap winPix(QString(":/res/LevelCompletedDialogBg.png"));
+    QIcon winIcon(winPix);
+    winBtn->setFixedSize(winPix.width(), winPix.height());
+    winBtn->setStyleSheet("QPushButton{border:0px;}");
+    winBtn->setIcon(winIcon);
+    winBtn->setIconSize(QSize(winPix.width(), winPix.height()));
+    winBtn->move((this->width()-winBtn->width())*0.5, -winBtn->height());
+    QPropertyAnimation* winBtnProAni = new QPropertyAnimation(winBtn, "geometry");
+    winBtnProAni->setDuration(1000);
+    winBtnProAni->setStartValue(QRect(winBtn->x(), winBtn->y(), winBtn->width(), winBtn->height()));
+    winBtnProAni->setEndValue(QRect(winBtn->x(), 0.7*winBtn->height(), winBtn->width(), winBtn->height()));
+    winBtnProAni->setEasingCurve(QEasingCurve::OutBounce);
+
     for(int i = 0 ; i < 4;i++)
     {
         for(int j = 0 ; j < 4; j++)
@@ -57,7 +72,7 @@ PlayScene::PlayScene(int levelIndex):
             coins[i][j]->move(59 + i*50, 202+j*50);
             connect(coins[i][j], &QPushButton::clicked, this, [=](){
                 coins[i][j]->changeIcon();
-                QTimer::singleShot(60,[=](){
+                QTimer::singleShot(120,[=](){
                     if(i>0){
                         coins[i-1][j]->changeIcon();
                     }
@@ -70,10 +85,31 @@ PlayScene::PlayScene(int levelIndex):
                     if(j < 3){
                         coins[i][j+1]->changeIcon();
                     }
+                    this->isWin = true;
+                    for(int i=0; i<4; i++){
+                        for(int j=0; j<4; j++){
+                            if(coins[i][j]->m_coinIndex == 0){
+                                this->isWin = false;
+                            }
+                        }
+                    }
+                    if(this->isWin){
+                        emit win();
+                        for(int i=0; i<4; i++){
+                            for(int j=0; j<4; j++){
+                                    coins[i][j]->win = true;
+                            }
+                        }
+                    }
                 });
             });
         }
     }
+
+    connect(this, &PlayScene::win, this, [=](){
+        qDebug() << "胜利！";
+        winBtnProAni->start();
+    });
 }
 
 void PlayScene::paintEvent(QPaintEvent *event){

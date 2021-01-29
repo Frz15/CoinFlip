@@ -18,9 +18,11 @@ public:
     ~PlayScene();
     int m_levelIndex;
     MyCoin* coins[4][4];
+    bool isWin;
 
 signals:
     void playSceneBack();
+    void win();
 
 private:
     Ui::PlayScene *ui;
