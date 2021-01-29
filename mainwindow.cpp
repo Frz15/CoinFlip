@@ -23,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
     checkpointChoice = new CheckpointChoice();
     connect(checkpointChoice, &CheckpointChoice::chooseSceneBack, this, [=](){
         QTimer::singleShot(200,this, [=](){
+            this->setGeometry(checkpointChoice->geometry());
             this->show();
         });
     });
@@ -38,6 +39,7 @@ MainWindow::MainWindow(QWidget *parent)
         StartBtn->up();
         QTimer::singleShot(200,this,[=](){
             this->hide();
+            checkpointChoice->setGeometry(this->geometry());
             checkpointChoice->show();
         });
     });

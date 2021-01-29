@@ -37,8 +37,10 @@ CheckpointChoice::CheckpointChoice(QWidget *parent) :
             qDebug() << str;
             PlayScene* play = new PlayScene(i+1);
             this->hide();
+            play->setGeometry(this->geometry());
             play->show();
             connect(play, &PlayScene::playSceneBack, this, [=](){
+                this->setGeometry(play->geometry());
                 this->show();
             });
         });
