@@ -2,6 +2,7 @@
 #define PLAYSCENE_H
 
 #include <QMainWindow>
+#include "mycoin.h"
 
 namespace Ui {
 class PlayScene;
@@ -16,6 +17,8 @@ public:
     void paintEvent(QPaintEvent* );
     ~PlayScene();
     int m_levelIndex;
+    MyCoin* coins[4][4];
+
 signals:
     void playSceneBack();
 

@@ -52,9 +52,26 @@ PlayScene::PlayScene(int levelIndex):
             label->setParent(this);
             label->move(57 + i*50, 200+j*50);
             int coinIndex = allCoinData[i][j];
-            MyCoin* coin = new MyCoin(coinIndex);
-            coin->setParent(this);
-            coin->move(59 + i*50, 202+j*50);
+            coins[i][j] = new MyCoin(i,j,coinIndex);
+            coins[i][j]->setParent(this);
+            coins[i][j]->move(59 + i*50, 202+j*50);
+            connect(coins[i][j], &QPushButton::clicked, this, [=](){
+                coins[i][j]->changeIcon();
+                QTimer::singleShot(60,[=](){
+                    if(i>0){
+                        coins[i-1][j]->changeIcon();
+                    }
+                    if(i < 3){
+                        coins[i+1][j]->changeIcon();
+                    }
+                    if(j > 0){
+                        coins[i][j-1]->changeIcon();
+                    }
+                    if(j < 3){
+                        coins[i][j+1]->changeIcon();
+                    }
+                });
+            });
         }
     }
 }
@@ -69,7 +86,6 @@ void PlayScene::paintEvent(QPaintEvent *event){
     painter.drawPixmap((this->width()-Title.width())*0.5, 30, Title);
 
     QPixmap CoinBG(":/res/BoardNode.png");
-
 
 };
 
